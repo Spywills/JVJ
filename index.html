@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JVJ Serviços Digitais | Intermediação Institucional de Criptoativos</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Ticker -->
+  <div class="ticker-bar">
+    <div class="ticker-track">
+      <div class="ticker-content" id="tickerContent">
+        <span class="ticker-item">Carregando cotações...</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="#" class="logo">
+        <img src="jvj_logo_transparent.png" alt="JVJ Digital" class="logo-img">
+      </a>
+      <nav class="nav" aria-label="Navegação principal">
+        <a href="#sobre">Sobre</a>
+        <a href="#servicos">Serviços</a>
+        <a href="#diferenciais">Diferenciais</a>
+        <a href="#compliance">Compliance</a>
+        <a href="#contato" class="btn-nav">Entrar em Contato</a>
+      </nav>
+      <button class="mobile-toggle" aria-label="Abrir menu" id="menuToggle">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <canvas id="heroCanvas"></canvas>
+    <div class="container hero-content">
+      <div class="hero-label">Intermediação Institucional de Criptoativos</div>
+      <h1>Intermediação Segura de Criptoativos para Operações OTC e P2P</h1>
+      <p class="hero-sub">Soluções estruturadas para compra e venda de ativos digitais com segurança, compliance e agilidade.</p>
+      <div class="hero-actions">
+        <a href="#contato" class="btn-primary">Entrar em Contato</a>
+        <a href="#servicos" class="btn-ghost">Nossos Serviços</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sobre -->
+  <section id="sobre" class="section sobre">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Quem Somos</span>
+        <h2>Estrutura institucional para o mercado de ativos digitais</h2>
+      </div>
+      <p class="sobre-desc">A JVJ Serviços Digitais é uma empresa especializada na intermediação de criptoativos, com foco em operações OTC e P2P de alto volume. Atuamos como ponte entre compradores e vendedores, garantindo execução profissional, liquidez e conformidade regulatória em cada transação.</p>
+      <div class="sobre-stats">
+        <div class="stat">
+          <div class="stat-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div>
+            <strong>Operações OTC</strong>
+            <p>Execução de grandes volumes com discrição e segurança</p>
+          </div>
+        </div>
+        <div class="stat">
+          <div class="stat-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 3h5v5M4 20L21 3M8 21H3v-5M20 4L3 21"/></svg>
+          </div>
+          <div>
+            <strong>Intermediação P2P</strong>
+            <p>Conexão direta entre partes com garantia de liquidação</p>
+          </div>
+        </div>
+        <div class="stat">
+          <div class="stat-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10A15.3 15.3 0 0112 2z"/></svg>
+          </div>
+          <div>
+            <strong>Liquidez</strong>
+            <p>Acesso a múltiplas fontes de liquidez para melhores preços</p>
+          </div>
+        </div>
+        <div class="stat">
+          <div class="stat-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
+          <div>
+            <strong>Execução Profissional</strong>
+            <p>Processos ágeis com controle rigoroso em cada etapa</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Serviços -->
+  <section id="servicos" class="section servicos">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Serviços</span>
+        <h2>Soluções sob medida para operações com criptoativos</h2>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3h18v18H3z"/><path d="M3 9h18M9 3v18"/></svg>
+          </div>
+          <h3>OTC Trading</h3>
+          <p>Execução de operações de grande volume fora do livro de ofertas, com preços negociados e liquidação garantida. Ideal para movimentações que exigem discrição e mínimo impacto no mercado.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 3h5v5M4 20L21 3M8 21H3v-5M20 4L3 21"/></svg>
+          </div>
+          <h3>Intermediação P2P</h3>
+          <p>Conectamos compradores e vendedores de forma segura, atuando como intermediário de confiança com verificação de ambas as partes e acompanhamento completo da operação.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          </div>
+          <h3>Provisão de Liquidez</h3>
+          <p>Acesso a múltiplas fontes de liquidez para garantir as melhores cotações e execução rápida, independente do volume da operação.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          </div>
+          <h3>Precificação Personalizada</h3>
+          <p>Modelo baseado em spread transparente, sem taxas ocultas. Cotações competitivas ajustadas ao volume e perfil de cada operação.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Diferenciais -->
+  <section id="diferenciais" class="section diferenciais">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Diferenciais</span>
+        <h2>Por que operar com a JVJ</h2>
+      </div>
+      <div class="diff-grid">
+        <div class="diff-item">
+          <div class="diff-number">01</div>
+          <h3>Execução Rápida</h3>
+          <p>Operações liquidadas com agilidade. Processos otimizados para minimizar o tempo entre cotação e liquidação.</p>
+        </div>
+        <div class="diff-item">
+          <div class="diff-number">02</div>
+          <h3>Atendimento Dedicado</h3>
+          <p>Mesa de operações com atendimento personalizado. Cada cliente tem acompanhamento direto durante toda a operação.</p>
+        </div>
+        <div class="diff-item">
+          <div class="diff-number">03</div>
+          <h3>Controle de Risco</h3>
+          <p>Análise rigorosa de cada transação com processos internos de mitigação de risco e verificação de contrapartes.</p>
+        </div>
+        <div class="diff-item">
+          <div class="diff-number">04</div>
+          <h3>Operações Estruturadas</h3>
+          <p>Fluxos operacionais claros e documentados, com rastreabilidade completa e conformidade em cada etapa.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Compliance -->
+  <section id="compliance" class="section compliance">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Compliance & Segurança</span>
+        <h2>Compromisso com a conformidade regulatória</h2>
+      </div>
+      <div class="compliance-content">
+        <div class="compliance-text">
+          <p>A JVJ opera com rigorosos padrões de compliance, alinhados às melhores práticas do mercado financeiro e às exigências regulatórias aplicáveis ao setor de criptoativos no Brasil.</p>
+          <p>Nosso compromisso com a segurança e a transparência é a base de cada operação que realizamos.</p>
+        </div>
+        <div class="compliance-grid">
+          <div class="compliance-item">
+            <div class="compliance-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div>
+              <h4>Política KYC/AML</h4>
+              <p>Verificação de identidade e origem de recursos de todos os clientes e contrapartes.</p>
+            </div>
+          </div>
+          <div class="compliance-item">
+            <div class="compliance-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </div>
+            <div>
+              <h4>Monitoramento de Transações</h4>
+              <p>Acompanhamento contínuo de todas as operações com ferramentas de análise on-chain.</p>
+            </div>
+          </div>
+          <div class="compliance-item">
+            <div class="compliance-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+            </div>
+            <div>
+              <h4>Análise de Risco Interna</h4>
+              <p>Avaliação criteriosa de cada operação com base em critérios de risco pré-definidos.</p>
+            </div>
+          </div>
+          <div class="compliance-item">
+            <div class="compliance-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+            </div>
+            <div>
+              <h4>Alinhamento Legal</h4>
+              <p>Operações em conformidade com a legislação brasileira e diretrizes do COAF e Banco Central.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contato -->
+  <section id="contato" class="section contato">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Contato</span>
+        <h2>Fale com nossa mesa de operações</h2>
+      </div>
+      <div class="contato-grid">
+        <div class="contato-card">
+          <div class="contato-icon">📧</div>
+          <h4>E-mail</h4>
+          <a href="mailto:contato@jvjdigital.com.br">contato@jvjdigital.com.br</a>
+        </div>
+        <div class="contato-card">
+          <div class="contato-icon">💬</div>
+          <h4>WhatsApp</h4>
+          <a href="#">Falar com a mesa</a>
+        </div>
+        <div class="contato-card">
+          <div class="contato-icon">🕐</div>
+          <h4>Horário</h4>
+          <p>Seg - Sex, 9h às 18h</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-col footer-brand">
+          <img src="jvj_logo_dark.png" alt="JVJ Digital" class="footer-logo">
+          <p class="footer-company">JVJ Serviços Digitais LTDA</p>
+          <p class="footer-cnpj">CNPJ: 43.079.520/0001-44</p>
+          <p class="footer-email">contato@jvjdigital.com.br</p>
+        </div>
+        <div class="footer-col">
+          <h4>Navegação</h4>
+          <ul>
+            <li><a href="#sobre">Sobre</a></li>
+            <li><a href="#servicos">Serviços</a></li>
+            <li><a href="#diferenciais">Diferenciais</a></li>
+            <li><a href="#compliance">Compliance</a></li>
+            <li><a href="#contato">Contato</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Política de PLD/AML</a></li>
+            <li><a href="#">Termos de Uso</a></li>
+            <li><a href="#">Política de Privacidade</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Redes</h4>
+          <ul>
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">LinkedIn</a></li>
+            <li><a href="#">Telegram</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 JVJ Serviços Digitais LTDA. Todos os direitos reservados.</p>
+        <p class="footer-disclaimer">Intermediação de criptoativos. Operações sujeitas a variação de mercado. Este site não constitui oferta de valores mobiliários.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
