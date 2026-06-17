@@ -1,99 +1,135 @@
-// === TICKER ===
-const SYMBOLS = ['BTCUSDT', 'ETHUSDT', 'USDTBRL'];
-const LABELS = { BTCUSDT: 'BTC/USDT', ETHUSDT: 'ETH/USDT', USDTBRL: 'USDT/BRL' };
+const SYMBOLS = ["BTCUSDT", "ETHUSDT", "USDTBRL"];
+const LABELS = {
+  BTCUSDT: "BTC/USDT",
+  ETHUSDT: "ETH/USDT",
+  USDTBRL: "USDT/BRL"
+};
 
 async function fetchPrices() {
   try {
-    const res = await fetch('https://api.binance.com/api/v3/ticker/24hr?symbols=' + JSON.stringify(SYMBOLS));
-    const data = await res.json();
-    return data.map(t => ({
-      symbol: LABELS[t.symbol] || t.symbol,
-      price: parseFloat(t.lastPrice),
-      change: parseFloat(t.priceChangePercent)
+    const endpoint = "https://api.binance.com/api/v3/ticker/24hr?symbols=" + encodeURIComponent(JSON.stringify(SYMBOLS));
+    const response = await fetch(endpoint);
+    if (!response.ok) throw new Error("Ticker unavailable");
+
+    const data = await response.json();
+    return data.map((ticker) => ({
+      symbol: LABELS[ticker.symbol] || ticker.symbol,
+      price: Number(ticker.lastPrice),
+      change: Number(ticker.priceChangePercent)
     }));
-  } catch { return null; }
+  } catch {
+    return [
+      { symbol: "BTC/USDT", price: 0, change: 0 },
+      { symbol: "ETH/USDT", price: 0, change: 0 },
+      { symbol: "USDT/BRL", price: 0, change: 0 }
+    ];
+  }
 }
 
 function formatPrice(price, symbol) {
-  if (symbol === 'USDT/BRL') return 'R$ ' + price.toFixed(2);
-  return '$ ' + price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  if (!price) return "Sob consulta";
+  if (symbol === "USDT/BRL") return "R$ " + price.toFixed(2).replace(".", ",");
+  return "$ " + price.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
 function renderTicker(prices) {
-  const el = document.getElementById('tickerContent');
-  const items = prices.map(p => {
-    const arrow = p.change >= 0 ? '▲' : '▼';
-    const cls = p.change >= 0 ? 'up' : 'down';
-    return `<span class="ticker-item">${p.symbol} <strong>${formatPrice(p.price, p.symbol)}</strong> <span class="ticker-${cls}">${arrow} ${Math.abs(p.change).toFixed(2)}%</span></span>`;
-  }).join('');
-  el.innerHTML = items + items;
+  const ticker = document.getElementById("tickerContent");
+  if (!ticker) return;
+
+  const items = prices.map((price) => {
+    const direction = price.change >= 0 ? "up" : "down";
+    const arrow = price.change >= 0 ? "▲" : "▼";
+    const change = price.price ? `${arrow} ${Math.abs(price.change).toFixed(2)}%` : "Mesa OTC";
+
+    return `
+      <span class="ticker-item">
+        ${price.symbol}
+        <strong>${formatPrice(price.price, price.symbol)}</strong>
+        <span class="ticker-${direction}">${change}</span>
+      </span>
+    `;
+  }).join("");
+
+  ticker.innerHTML = items + items;
+
+  const usdt = prices.find((price) => price.symbol === "USDT/BRL");
+  const panelUsdt = document.getElementById("panelUsdt");
+  if (panelUsdt && usdt) panelUsdt.textContent = formatPrice(usdt.price, usdt.symbol);
 }
 
 async function updateTicker() {
-  const prices = await fetchPrices();
-  if (prices) renderTicker(prices);
+  renderTicker(await fetchPrices());
 }
+
 updateTicker();
 setInterval(updateTicker, 30000);
 
-// === HERO CANVAS (subtle grid animation) ===
-const canvas = document.getElementById('heroCanvas');
+const canvas = document.getElementById("heroCanvas");
+
 if (canvas) {
-  const ctx = canvas.getContext('2d');
-  let w, h, dots = [];
+  const context = canvas.getContext("2d");
+  let width = 0;
+  let height = 0;
+  let lines = [];
 
-  function resize() {
-    w = canvas.width = canvas.offsetWidth;
-    h = canvas.height = canvas.offsetHeight;
-    dots = [];
-    const spacing = 60;
-    for (let x = 0; x < w; x += spacing) {
-      for (let y = 0; y < h; y += spacing) {
-        dots.push({ x, y, baseAlpha: Math.random() * 0.3 + 0.05, phase: Math.random() * Math.PI * 2 });
+  function resizeCanvas() {
+    const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+    width = canvas.offsetWidth;
+    height = canvas.offsetHeight;
+    canvas.width = width * pixelRatio;
+    canvas.height = height * pixelRatio;
+    context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+
+    lines = Array.from({ length: 38 }, () => ({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      length: 80 + Math.random() * 180,
+      speed: 0.18 + Math.random() * 0.36,
+      alpha: 0.05 + Math.random() * 0.13
+    }));
+  }
+
+  function drawCanvas() {
+    context.clearRect(0, 0, width, height);
+
+    lines.forEach((line) => {
+      context.strokeStyle = `rgba(255, 255, 255, ${line.alpha})`;
+      context.lineWidth = 1;
+      context.beginPath();
+      context.moveTo(line.x, line.y);
+      context.lineTo(line.x + line.length, line.y - line.length * 0.28);
+      context.stroke();
+
+      line.x += line.speed;
+      if (line.x > width + line.length) {
+        line.x = -line.length;
+        line.y = Math.random() * height;
       }
-    }
-  }
-
-  function draw(time) {
-    ctx.clearRect(0, 0, w, h);
-    dots.forEach(d => {
-      const alpha = d.baseAlpha + Math.sin(time * 0.001 + d.phase) * 0.15;
-      ctx.fillStyle = `rgba(59, 130, 246, ${Math.max(0, alpha)})`;
-      ctx.beginPath();
-      ctx.arc(d.x, d.y, 1.2, 0, Math.PI * 2);
-      ctx.fill();
     });
-    requestAnimationFrame(draw);
+
+    requestAnimationFrame(drawCanvas);
   }
 
-  resize();
-  window.addEventListener('resize', resize);
-  requestAnimationFrame(draw);
+  resizeCanvas();
+  window.addEventListener("resize", resizeCanvas);
+  requestAnimationFrame(drawCanvas);
 }
 
-// === SCROLL ANIMATIONS ===
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add('visible');
-    }
-  });
-}, { threshold: 0.1 });
+const menuToggle = document.getElementById("menuToggle");
+const nav = document.querySelector(".nav");
 
-document.querySelectorAll('.section').forEach(s => observer.observe(s));
-
-// === MOBILE MENU ===
-const toggle = document.getElementById('menuToggle');
-const nav = document.querySelector('.nav');
-if (toggle) {
-  toggle.addEventListener('click', () => {
-    nav.classList.toggle('open');
-    toggle.classList.toggle('active');
+if (menuToggle && nav) {
+  menuToggle.addEventListener("click", () => {
+    const isOpen = nav.classList.toggle("open");
+    menuToggle.classList.toggle("active", isOpen);
+    menuToggle.setAttribute("aria-expanded", String(isOpen));
   });
-  nav.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => {
-      nav.classList.remove('open');
-      toggle.classList.remove('active');
+
+  nav.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      nav.classList.remove("open");
+      menuToggle.classList.remove("active");
+      menuToggle.setAttribute("aria-expanded", "false");
     });
   });
 }
